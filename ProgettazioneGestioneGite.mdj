@@ -989,7 +989,7 @@
 							"top": 320,
 							"width": 495,
 							"height": 25,
-							"text": "record Gita: 35 byte(localita) 25 byte(data) 2 byte(id)"
+							"text": "record Gita: 35 byte(localita) 25 byte(data) 2 byte(id) accesso diretto"
 						},
 						{
 							"_type": "UMLTextView",
@@ -1000,10 +1000,24 @@
 							"font": "Arial;13;0",
 							"parentStyle": false,
 							"left": 208,
-							"top": 351,
-							"width": 491,
-							"height": 25,
-							"text": "record studente: 20 byte(nome) 20 byte(cognome) 4 byte(classe) 2 byte(matricola)"
+							"top": 344,
+							"width": 560,
+							"height": 38,
+							"text": "record studente: 20 byte(nome) 20 byte(cognome) 4 byte(classe) 2 byte(matricola) accesso diretto"
+						},
+						{
+							"_type": "UMLTextView",
+							"_id": "AAAAAAGcwrKK3SVmcIQ=",
+							"_parent": {
+								"$ref": "AAAAAAFF+qBtyKM79qY="
+							},
+							"font": "Arial;13;0",
+							"parentStyle": false,
+							"left": 208,
+							"top": 384,
+							"width": 252,
+							"height": 64,
+							"text": "file sequenziale che lega matricola ad id gita"
 						}
 					]
 				},
