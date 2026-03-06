@@ -14,7 +14,7 @@ public class AureliMartinelliGestioneGite {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        java.awt.EventQueue.invokeLater(() -> new FrmGite().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new FrmVisualizza().setVisible(true));
     }
     
 }
