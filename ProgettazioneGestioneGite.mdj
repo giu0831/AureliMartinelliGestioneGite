@@ -989,7 +989,7 @@
 							"top": 320,
 							"width": 495,
 							"height": 25,
-							"text": "record Gita: 35 byte(localita) 25 byte(data) 2 byte(id) accesso diretto"
+							"text": "record Gita: 34 byte(localita) 24 byte(data) 4 byte(id) accesso diretto"
 						},
 						{
 							"_type": "UMLTextView",
@@ -1003,7 +1003,7 @@
 							"top": 344,
 							"width": 560,
 							"height": 38,
-							"text": "record studente: 20 byte(nome) 20 byte(cognome) 4 byte(classe) 2 byte(matricola) accesso diretto"
+							"text": "record studente: 20 byte(nome) 20 byte(cognome) 4 byte(classe) 4 byte(matricola) accesso diretto"
 						},
 						{
 							"_type": "UMLTextView",
