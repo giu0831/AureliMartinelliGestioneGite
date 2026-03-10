@@ -188,6 +188,7 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
             /*
             lettura dati da scrivere
             */
+            
             /*
             scrittura su file
             */
@@ -201,6 +202,19 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCreaActionPerformed
 
+    private String aggiustaLunghezza(String s, int dimensione) {
+        String aggiustata=s;
+        if (s.length() < dimensione) {
+            for (int i = 0; i < (dimensione - s.length()); i++) {
+                aggiustata += "*";
+            }
+            return aggiustata;
+        } else if (s.length() > dimensione) {
+            aggiustata = s.substring(0, dimensione - 1);
+            return aggiustata;
+        }
+        return s;
+    }
     /**
      * @param args the command line arguments
      */
