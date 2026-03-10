@@ -4,6 +4,10 @@
  */
 package aurelimartinelligestionegite;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
 /**
  *
  * @author aureli.giulia
@@ -11,7 +15,7 @@ package aurelimartinelligestionegite;
 public class FrmCreazioneGita extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmCreazioneGita.class.getName());
-
+    private static final int DIM_RECORD = 62;
     /**
      * Creates new form FrmCreazioneGita
      */
@@ -46,14 +50,18 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
         btnIndietro.setBackground(new java.awt.Color(51, 153, 255));
         btnIndietro.setText("<");
         btnIndietro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnIndietro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIndietroActionPerformed(evt);
+            }
+        });
 
         btnAvanti.setBackground(new java.awt.Color(0, 153, 255));
         btnAvanti.setText(">");
         btnAvanti.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        txtLuogo.addActionListener(new java.awt.event.ActionListener() {
+        btnAvanti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtLuogoActionPerformed(evt);
+                btnAvantiActionPerformed(evt);
             }
         });
 
@@ -61,6 +69,11 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
         btnCrea.setFont(new java.awt.Font("Sitka Subheading", 3, 14)); // NOI18N
         btnCrea.setText("Crea");
         btnCrea.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCrea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreaActionPerformed(evt);
+            }
+        });
 
         lblLuogo.setFont(new java.awt.Font("Sitka Subheading", 3, 14)); // NOI18N
         lblLuogo.setForeground(new java.awt.Color(0, 0, 204));
@@ -152,9 +165,41 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtLuogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLuogoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtLuogoActionPerformed
+    private void btnAvantiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvantiActionPerformed
+        FrmCreazioneStudente frmCreazioneStudente = new FrmCreazioneStudente();
+        frmCreazioneStudente.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAvantiActionPerformed
+
+    private void btnIndietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndietroActionPerformed
+        FrmVisualizza frmVisualizza = new FrmVisualizza();
+        frmVisualizza.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnIndietroActionPerformed
+
+    private void btnCreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreaActionPerformed
+        try {
+            RandomAccessFile file = new RandomAccessFile("elencoGite.dat", "rw");
+            //calcolo la dimensione del file per capire quanti record ci sono. 
+            //Questo serve perché ogni nuovo record vine aggiunto in fondo
+            int nRecord = (int) (file.length() / DIM_RECORD);
+            //con il metodo seek ci si sposta all'interno del file alla posizione desiderata
+            file.seek(nRecord * DIM_RECORD);
+            /*
+            lettura dati da scrivere
+            */
+            /*
+            scrittura su file
+            */
+
+            file.close();
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("File non trovato");
+        } catch (IOException e) {
+            System.out.println("Problema in lettura-scrittura file");
+        }
+    }//GEN-LAST:event_btnCreaActionPerformed
 
     /**
      * @param args the command line arguments

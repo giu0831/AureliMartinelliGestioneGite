@@ -108,7 +108,7 @@
                               <Component id="txtClasse" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnCreaStudente" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCreaStudente" min="-2" pref="35" max="-2" attributes="0"/>
                       </Group>
                       <Component id="jScrollPane1" min="-2" pref="233" max="-2" attributes="0"/>
                   </Group>
@@ -217,6 +217,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIndietroActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnAvanti">
           <Properties>
@@ -230,6 +233,9 @@
               </Border>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAvantiActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

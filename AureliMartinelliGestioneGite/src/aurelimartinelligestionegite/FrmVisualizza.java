@@ -39,6 +39,7 @@ public class FrmVisualizza extends javax.swing.JFrame {
         btnAvanti = new javax.swing.JButton();
         lblLuogo = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
+        btnIscrivi = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,10 +80,20 @@ public class FrmVisualizza extends javax.swing.JFrame {
         btnIndietro.setBackground(new java.awt.Color(51, 153, 255));
         btnIndietro.setText("<");
         btnIndietro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnIndietro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIndietroActionPerformed(evt);
+            }
+        });
 
         btnAvanti.setBackground(new java.awt.Color(0, 153, 255));
         btnAvanti.setText(">");
         btnAvanti.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAvanti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvantiActionPerformed(evt);
+            }
+        });
 
         lblLuogo.setFont(new java.awt.Font("Sitka Subheading", 3, 14)); // NOI18N
         lblLuogo.setForeground(new java.awt.Color(0, 0, 204));
@@ -93,6 +104,11 @@ public class FrmVisualizza extends javax.swing.JFrame {
         lblNome.setForeground(new java.awt.Color(0, 0, 204));
         lblNome.setLabelFor(lblNome);
         lblNome.setText("Nome");
+
+        btnIscrivi.setBackground(new java.awt.Color(51, 153, 255));
+        btnIscrivi.setFont(new java.awt.Font("Sitka Subheading", 3, 12)); // NOI18N
+        btnIscrivi.setText("Iscrivi studente alla gita");
+        btnIscrivi.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout pnlVisualizzaLayout = new javax.swing.GroupLayout(pnlVisualizza);
         pnlVisualizza.setLayout(pnlVisualizzaLayout);
@@ -106,7 +122,8 @@ public class FrmVisualizza extends javax.swing.JFrame {
                     .addComponent(cmbStudenti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cmbGite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblNome)
-                    .addComponent(lblLuogo))
+                    .addComponent(lblLuogo)
+                    .addComponent(btnIscrivi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
@@ -130,10 +147,12 @@ public class FrmVisualizza extends javax.swing.JFrame {
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbGite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(btnGite, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnStudenti, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
+                        .addComponent(btnIscrivi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(btnGite, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11)
+                        .addComponent(btnStudenti, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlVisualizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,6 +178,18 @@ public class FrmVisualizza extends javax.swing.JFrame {
     private void cmbStudentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStudentiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbStudentiActionPerformed
+
+    private void btnIndietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndietroActionPerformed
+        FrmCreazioneStudente frmCreazioneStudente = new FrmCreazioneStudente();
+        frmCreazioneStudente.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnIndietroActionPerformed
+
+    private void btnAvantiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvantiActionPerformed
+        FrmCreazioneGita frmCreazioneGita = new FrmCreazioneGita();
+        frmCreazioneGita.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAvantiActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,6 +220,7 @@ public class FrmVisualizza extends javax.swing.JFrame {
     private javax.swing.JButton btnAvanti;
     private javax.swing.JButton btnGite;
     private javax.swing.JButton btnIndietro;
+    private javax.swing.JButton btnIscrivi;
     private javax.swing.JButton btnStudenti;
     private javax.swing.JComboBox<String> cmbGite;
     private javax.swing.JComboBox<String> cmbStudenti;
