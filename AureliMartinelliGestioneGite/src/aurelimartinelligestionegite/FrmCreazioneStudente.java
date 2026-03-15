@@ -4,6 +4,11 @@
  */
 package aurelimartinelligestionegite;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aureli.giulia
@@ -11,12 +16,14 @@ package aurelimartinelligestionegite;
 public class FrmCreazioneStudente extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmCreazioneStudente.class.getName());
-
+    private static final int DIM_RECORD = 48;
+    private int matricole = GestioneStudenti.getListaStudenti().size();
     /**
      * Creates new form FrmCreazioneStudente
      */
     public FrmCreazioneStudente() {
         initComponents();
+        caricaTabella();
     }
 
     /**
@@ -36,12 +43,13 @@ public class FrmCreazioneStudente extends javax.swing.JFrame {
         lblClasse = new javax.swing.JLabel();
         txtClasse = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblStudenti = new javax.swing.JTable();
         btnCreaStudente = new javax.swing.JButton();
         btnIndietro = new javax.swing.JButton();
         btnAvanti = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Crea studenti");
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -60,22 +68,39 @@ public class FrmCreazioneStudente extends javax.swing.JFrame {
         lblClasse.setLabelFor(lblClasse);
         lblClasse.setText("Classe:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblStudenti.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "Cognome", "Classe"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblStudenti);
 
         btnCreaStudente.setBackground(new java.awt.Color(0, 153, 255));
         btnCreaStudente.setText("Crea Studente");
         btnCreaStudente.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCreaStudente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreaStudenteActionPerformed(evt);
+            }
+        });
 
         btnIndietro.setBackground(new java.awt.Color(0, 153, 255));
         btnIndietro.setText("<");
@@ -185,6 +210,23 @@ public class FrmCreazioneStudente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnAvantiActionPerformed
 
+    private void btnCreaStudenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreaStudenteActionPerformed
+        String nome = txtNome.getText(), cognome = txtCognome.getText(), classe = txtClasse.getText();
+        //creazione studente
+        GestioneStudenti.getListaStudenti().add(new Studente(nome, cognome, classe, matricole));
+        //scrittura dei dati nella tabella
+        DefaultTableModel model = (DefaultTableModel)tblStudenti.getModel();
+        model.addRow(new Object[]{nome, cognome, classe});
+        matricole++;
+    }//GEN-LAST:event_btnCreaStudenteActionPerformed
+    
+    public void caricaTabella(){
+        DefaultTableModel model = (DefaultTableModel)tblStudenti.getModel();
+        //tutti gli studenti vengono scritti nella tabella
+        for(Studente s : GestioneStudenti.getListaStudenti()){
+        model.addRow(new Object[]{s.getNome(), s.getCognome(), s.getClasse()}); 
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -216,10 +258,10 @@ public class FrmCreazioneStudente extends javax.swing.JFrame {
     private javax.swing.JButton btnIndietro;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblClasse;
     private javax.swing.JLabel lblCognome;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JTable tblStudenti;
     private javax.swing.JTextField txtClasse;
     private javax.swing.JTextField txtCognome;
     private javax.swing.JTextField txtNome;

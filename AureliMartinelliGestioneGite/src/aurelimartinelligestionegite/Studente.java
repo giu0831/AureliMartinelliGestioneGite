@@ -71,6 +71,55 @@ public class Studente {
     public ArrayList<Integer> getIdGita() {
         return idGita;
     }
+
+    /**
+     * Metodo che iscrive lo studente ad una gita
+     * @param g gita
+     * @return true se e' stato iscritto, false se non e' stato iscritto
+     */
+    public boolean iscrivi(Gita g){
+        if(controlloIdGita(g.getId()))return false;
+        idGita.add(g.getId());
+        return true;
+    }
+    
+    /**
+     * Metodo che controlla se lo studente e' gia' iscritto ad una gita
+     * @param idGita id della gita
+     * @return true se e' gia' iscritto, false se non e' gia' iscritto
+     */
+    public boolean controlloIdGita(int idGita){
+        for(int id : this.idGita){
+            if(idGita == id)return true;
+        }
+        return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Studente other = (Studente) obj;
+        return this.matricola == other.matricola;
+    }
+
+    @Override
+    public String toString() {
+        return  nome + " " + cognome + " " + classe + ", matricola:" + matricola;
+    }
     
     
 }

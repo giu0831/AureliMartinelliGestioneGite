@@ -4,6 +4,8 @@
  */
 package aurelimartinelligestionegite;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aureli.giulia
@@ -17,6 +19,18 @@ public class FrmVisualizza extends javax.swing.JFrame {
      */
     public FrmVisualizza() {
         initComponents();
+        //tuttu gli studenti vengono aggiunti alla combobox
+        if(GestioneStudenti.getListaStudenti() != null){
+            for(Studente s : GestioneStudenti.getListaStudenti()){
+                cmbStudenti.addItem(s);
+            }
+        }
+        //tutte le gite vengono aggiunte alla combobox
+        if(GestioneGite.getListaGite() != null){
+            for(Gita g : GestioneGite.getListaGite()){
+                cmbGite.addItem(g);
+            }
+        }
     }
 
     /**
@@ -29,51 +43,40 @@ public class FrmVisualizza extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlVisualizza = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblVisualizza = new javax.swing.JTable();
-        btnStudenti = new javax.swing.JButton();
-        btnGite = new javax.swing.JButton();
-        cmbGite = new javax.swing.JComboBox<>();
+        btnVediStudenti = new javax.swing.JButton();
+        btnVediGite = new javax.swing.JButton();
         cmbStudenti = new javax.swing.JComboBox<>();
+        cmbGite = new javax.swing.JComboBox<>();
         btnIndietro = new javax.swing.JButton();
         btnAvanti = new javax.swing.JButton();
         lblLuogo = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         btnIscrivi = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txaVisualizza = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Visualizza");
 
         pnlVisualizza.setBackground(new java.awt.Color(153, 204, 255));
 
-        tblVisualizza.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblVisualizza);
-
-        btnStudenti.setBackground(new java.awt.Color(51, 153, 255));
-        btnStudenti.setFont(new java.awt.Font("Sitka Subheading", 3, 12)); // NOI18N
-        btnStudenti.setText("Vedi studenti iscritti");
-        btnStudenti.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        btnGite.setBackground(new java.awt.Color(51, 153, 255));
-        btnGite.setFont(new java.awt.Font("Sitka Subheading", 3, 12)); // NOI18N
-        btnGite.setText("Vedi Gite scelte");
-        btnGite.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        cmbGite.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alessandra" }));
-
-        cmbStudenti.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Città di Castello" }));
-        cmbStudenti.addActionListener(new java.awt.event.ActionListener() {
+        btnVediStudenti.setBackground(new java.awt.Color(51, 153, 255));
+        btnVediStudenti.setFont(new java.awt.Font("Sitka Subheading", 3, 12)); // NOI18N
+        btnVediStudenti.setText("Vedi studenti iscritti");
+        btnVediStudenti.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVediStudenti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbStudentiActionPerformed(evt);
+                btnVediStudentiActionPerformed(evt);
+            }
+        });
+
+        btnVediGite.setBackground(new java.awt.Color(51, 153, 255));
+        btnVediGite.setFont(new java.awt.Font("Sitka Subheading", 3, 12)); // NOI18N
+        btnVediGite.setText("Vedi Gite scelte");
+        btnVediGite.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVediGite.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVediGiteActionPerformed(evt);
             }
         });
 
@@ -109,30 +112,40 @@ public class FrmVisualizza extends javax.swing.JFrame {
         btnIscrivi.setFont(new java.awt.Font("Sitka Subheading", 3, 12)); // NOI18N
         btnIscrivi.setText("Iscrivi studente alla gita");
         btnIscrivi.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnIscrivi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIscriviActionPerformed(evt);
+            }
+        });
+
+        txaVisualizza.setEditable(false);
+        txaVisualizza.setColumns(20);
+        txaVisualizza.setRows(5);
+        jScrollPane2.setViewportView(txaVisualizza);
 
         javax.swing.GroupLayout pnlVisualizzaLayout = new javax.swing.GroupLayout(pnlVisualizza);
         pnlVisualizza.setLayout(pnlVisualizzaLayout);
         pnlVisualizzaLayout.setHorizontalGroup(
             pnlVisualizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVisualizzaLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(pnlVisualizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnGite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnStudenti, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
-                    .addComponent(cmbStudenti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cmbGite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNome)
-                    .addComponent(lblLuogo)
-                    .addComponent(btnIscrivi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addGroup(pnlVisualizzaLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(btnIndietro, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAvanti, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
+                .addGap(50, 50, 50))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVisualizzaLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pnlVisualizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVediGite, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVediStudenti, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                    .addComponent(cmbGite, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cmbStudenti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNome)
+                    .addComponent(lblLuogo)
+                    .addComponent(btnIscrivi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         pnlVisualizzaLayout.setVerticalGroup(
             pnlVisualizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,18 +155,18 @@ public class FrmVisualizza extends javax.swing.JFrame {
                     .addGroup(pnlVisualizzaLayout.createSequentialGroup()
                         .addComponent(lblLuogo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbStudenti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbGite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbGite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbStudenti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23)
                         .addComponent(btnIscrivi, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
-                        .addComponent(btnGite, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVediGite, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(11, 11, 11)
-                        .addComponent(btnStudenti, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnVediStudenti, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlVisualizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAvanti)
@@ -175,10 +188,6 @@ public class FrmVisualizza extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmbStudentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStudentiActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbStudentiActionPerformed
-
     private void btnIndietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndietroActionPerformed
         FrmCreazioneStudente frmCreazioneStudente = new FrmCreazioneStudente();
         frmCreazioneStudente.setVisible(true);
@@ -186,11 +195,46 @@ public class FrmVisualizza extends javax.swing.JFrame {
     }//GEN-LAST:event_btnIndietroActionPerformed
 
     private void btnAvantiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvantiActionPerformed
-        FrmCreazioneGita frmCreazioneGita = new FrmCreazioneGita();
-        frmCreazioneGita.setVisible(true);
+        FrmFile frmFile = new FrmFile();
+        frmFile.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAvantiActionPerformed
 
+    private void btnIscriviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIscriviActionPerformed
+        Studente s = (Studente)cmbStudenti.getSelectedItem();
+        Gita g = (Gita)cmbGite.getSelectedItem();
+        //controllo per vedere se entrambe le combobox hanno un elemento selezionato
+        if(s == null || g == null) return;
+        //iscrizione e scrittura messaggio
+        if(s.iscrivi(g))JOptionPane.showMessageDialog(null, s.getNome() + " " + s.getCognome() + " e' stato iscritto alla gita di " + g.getLocalita() + " del " + g.getData(), "Informazione", JOptionPane.INFORMATION_MESSAGE);
+        else JOptionPane.showMessageDialog(null, s.getNome() + " " + s.getCognome() + " e' gia' iscritto alla gita di " + g.getLocalita() + " del " + g.getData(), "Informazione", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnIscriviActionPerformed
+
+    private void btnVediGiteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVediGiteActionPerformed
+        //si azzera il testo
+        txaVisualizza.setText("");
+        Studente s = (Studente)cmbStudenti.getSelectedItem();
+        //controllo per vedere se uno studente e' selezionato
+        if(s == null) return;
+        //scrittura testo
+        txaVisualizza.append("Gite a cui partecipa " + s.getNome() + " " + s.getCognome() + ": \n");
+        for(Gita g : GestioneGite.cercaGitePerStudente(s)){
+            txaVisualizza.append("-" + g.toString() + "\n");
+        }
+    }//GEN-LAST:event_btnVediGiteActionPerformed
+
+    private void btnVediStudentiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVediStudentiActionPerformed
+        //si azzera il testo
+        txaVisualizza.setText("");
+        Gita g = (Gita)cmbGite.getSelectedItem();
+        //controllo per vedere se una gita e' selezionata
+        if(g == null) return;
+        //scrittura testo
+        txaVisualizza.append("Studenti che partecipano alla gita di " + g.getLocalita() + " del " + g.getData() + ": \n");
+        for(Studente s : GestioneStudenti.cercaStudentiPerGita(g)){
+          txaVisualizza.append("-" + s.toString() + "\n");  
+        }
+    }//GEN-LAST:event_btnVediStudentiActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -218,16 +262,16 @@ public class FrmVisualizza extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAvanti;
-    private javax.swing.JButton btnGite;
     private javax.swing.JButton btnIndietro;
     private javax.swing.JButton btnIscrivi;
-    private javax.swing.JButton btnStudenti;
-    private javax.swing.JComboBox<String> cmbGite;
-    private javax.swing.JComboBox<String> cmbStudenti;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton btnVediGite;
+    private javax.swing.JButton btnVediStudenti;
+    private javax.swing.JComboBox<Gita> cmbGite;
+    private javax.swing.JComboBox<Studente> cmbStudenti;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblLuogo;
     private javax.swing.JLabel lblNome;
     private javax.swing.JPanel pnlVisualizza;
-    private javax.swing.JTable tblVisualizza;
+    private javax.swing.JTextArea txaVisualizza;
     // End of variables declaration//GEN-END:variables
 }

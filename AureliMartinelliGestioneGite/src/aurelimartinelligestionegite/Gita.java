@@ -80,7 +80,7 @@ public class Gita {
 
     @Override
     public String toString() {
-        return localita + " " + data + " " + id;
+        return localita + " " + data + ", id:" + id;
     }
     
     

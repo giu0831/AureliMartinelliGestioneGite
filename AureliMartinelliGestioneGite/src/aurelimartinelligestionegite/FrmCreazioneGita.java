@@ -7,6 +7,7 @@ package aurelimartinelligestionegite;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,11 +17,13 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmCreazioneGita.class.getName());
     private static final int DIM_RECORD = 62;
+    private int idGite = GestioneGite.getListaGite().size();
     /**
      * Creates new form FrmCreazioneGita
      */
     public FrmCreazioneGita() {
         initComponents();
+        caricaTabella();
     }
 
     /**
@@ -41,9 +44,10 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
         lblLuogo = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblCreazioneGita = new javax.swing.JTable();
+        tblGite = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Crea gite");
 
         pnlCreazioneGita.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -85,18 +89,30 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
         lblData.setLabelFor(txtData);
         lblData.setText("Data:");
 
-        tblCreazioneGita.setModel(new javax.swing.table.DefaultTableModel(
+        tblGite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Luogo", "Data"
             }
-        ));
-        jScrollPane1.setViewportView(tblCreazioneGita);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblGite);
 
         javax.swing.GroupLayout pnlCreazioneGitaLayout = new javax.swing.GroupLayout(pnlCreazioneGita);
         pnlCreazioneGita.setLayout(pnlCreazioneGitaLayout);
@@ -172,48 +188,27 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAvantiActionPerformed
 
     private void btnIndietroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndietroActionPerformed
-        FrmVisualizza frmVisualizza = new FrmVisualizza();
-        frmVisualizza.setVisible(true);
+        FrmFile frmFile = new FrmFile();
+        frmFile.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnIndietroActionPerformed
 
     private void btnCreaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreaActionPerformed
-        try {
-            RandomAccessFile file = new RandomAccessFile("elencoGite.dat", "rw");
-            //calcolo la dimensione del file per capire quanti record ci sono. 
-            //Questo serve perché ogni nuovo record vine aggiunto in fondo
-            int nRecord = (int) (file.length() / DIM_RECORD);
-            //con il metodo seek ci si sposta all'interno del file alla posizione desiderata
-            file.seek(nRecord * DIM_RECORD);
-            /*
-            lettura dati da scrivere
-            */
-            
-            /*
-            scrittura su file
-            */
-
-            file.close();
-
-        } catch (FileNotFoundException ex) {
-            System.out.println("File non trovato");
-        } catch (IOException e) {
-            System.out.println("Problema in lettura-scrittura file");
-        }
+        //creazione della gita
+        String luogo = txtLuogo.getText(), data = txtData.getText();
+        GestioneGite.getListaGite().add(new Gita(luogo, data, idGite));
+        //scrittura dei dati nella tabella
+        DefaultTableModel model = (DefaultTableModel)tblGite.getModel();
+        model.addRow(new Object[]{luogo, data});
+        idGite++;
     }//GEN-LAST:event_btnCreaActionPerformed
-
-    private String aggiustaLunghezza(String s, int dimensione) {
-        String aggiustata=s;
-        if (s.length() < dimensione) {
-            for (int i = 0; i < (dimensione - s.length()); i++) {
-                aggiustata += "*";
-            }
-            return aggiustata;
-        } else if (s.length() > dimensione) {
-            aggiustata = s.substring(0, dimensione - 1);
-            return aggiustata;
+    
+    public void caricaTabella(){
+        DefaultTableModel model = (DefaultTableModel)tblGite.getModel();
+        //tuttele gite vengono scritte nella tabella
+        for(Gita g : GestioneGite.getListaGite()){
+        model.addRow(new Object[]{g.getLocalita(), g.getData()}); 
         }
-        return s;
     }
     /**
      * @param args the command line arguments
@@ -248,7 +243,7 @@ public class FrmCreazioneGita extends javax.swing.JFrame {
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblLuogo;
     private javax.swing.JPanel pnlCreazioneGita;
-    private javax.swing.JTable tblCreazioneGita;
+    private javax.swing.JTable tblGite;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtLuogo;
     // End of variables declaration//GEN-END:variables
